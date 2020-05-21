@@ -7,6 +7,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   Color colorButton = Color(0xFFFA9025);
+
+  Color colorBack = Color(0xFF790C04);
   int tipo = 0;
   RoundedRectangleBorder roundedButton = RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(1.0),
@@ -53,7 +55,7 @@ class _HomePageState extends State<HomePage> {
                           this.tipo = 2;
                           setState(() {});
                         },
-                        child: Text("TIPS Y CONSEJOS"),
+                        child: Text("TIPS Y CONSEJOS",),
                       ))
                 ],
               ),
@@ -63,7 +65,7 @@ class _HomePageState extends State<HomePage> {
         title: Center(
           child: Text("LEGA APP"),
         ),
-        backgroundColor: Color(0xFF790C04),
+        backgroundColor: colorBack,
       ),
       body: Container(color: Color(0xFFFCAFA1), child: navegar(context)),
       bottomNavigationBar: Container(
@@ -72,7 +74,7 @@ class _HomePageState extends State<HomePage> {
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.w300),
             child: Container(
                 padding: EdgeInsets.only(top: 6, left: 6, right: 2),
-                decoration: BoxDecoration(color: Color(0xFF790C04)),
+                decoration: BoxDecoration(color: colorBack),
                 child: GridView.count(
                   crossAxisCount: 2,
                   childAspectRatio: 5,
@@ -80,7 +82,7 @@ class _HomePageState extends State<HomePage> {
                     Text("Angie Sofía Sierra Cortes"),
                     Text("Laura Marcela Flechas Bastidas"),
                     Text("María Paula Cruz Romero"),
-                    Text("Hermán Darvid Giraldo Mora")
+                    Text("Germán Darvid Giraldo Mora")
                   ],
                 )),
           )),
@@ -91,7 +93,97 @@ class _HomePageState extends State<HomePage> {
     if (tipo == 1) {
       return denuncia(context);
     }
+    if (tipo == 2) {
+      return tipsConsejos(context);
+    }
     return home();
+  }
+
+  Widget tipsConsejos(BuildContext context) {
+    return Container(
+      child: ListView(
+        children: <Widget>[
+          SizedBox(
+            height: 20,
+          ),
+          Center(
+            child: Text("Tips y Consejos",style:  TextStyle(color: this.colorBack, fontWeight: FontWeight.w400, fontSize: 18,fontStyle: FontStyle.italic ),),
+          ),
+          SizedBox(
+            height: 30,
+          ),
+          custom(false, "MEDECINA LEGAL"),
+          SizedBox(
+            height: 10,
+          ),
+          custom(true, "ICBF"),
+          SizedBox(
+            height: 10,
+          ),
+          custom(false, "POLICIA NACIONAL"),
+          SizedBox(
+            height: 10,
+          ),
+          custom(true, "FISCALIA"),
+          SizedBox(
+            height: 10,
+          ),
+          custom(false, "CONTRALORIA"),
+          SizedBox(
+            height: 10,
+          ),
+          custom(true, "PROCURADURIA"),
+          SizedBox(
+            height: 10,
+          ),
+          custom(false, "DEFENSORIA DEL PUEBLO")
+        ],
+      ),
+    );
+  }
+
+  Widget custom(bool isRight, String text) {
+    Widget right = null;
+    Widget left = null;
+
+    Widget d = RaisedButton(
+      color: colorBack,
+      onPressed: () {
+        setState(() {
+          this._mostrarAlert(context, text, "En desarollo");
+        });
+      },
+      shape: roundedButton,
+      child: Text(text,style: TextStyle(color: Colors.white, fontWeight: FontWeight.w400,fontStyle: FontStyle.italic ),),
+    );
+    if (isRight) {
+      right = d;
+    } else {
+      left = d;
+    }
+    double tamano = 200.0;
+    double height = 50;
+
+    return Row(children: <Widget>[
+      Expanded(
+        child: Align(
+          alignment: Alignment.centerLeft,
+          child: Container(
+            height: height,
+            width: tamano,
+            child: right,
+          ),
+        ),
+        flex: 6,
+      ),
+      Expanded(
+        child: Align(
+          alignment: Alignment.centerRight,
+          child: Container(height: height, width: tamano, child: left),
+        ),
+        flex: 6,
+      )
+    ]);
   }
 
   Widget home() {
@@ -261,7 +353,7 @@ class _HomePageState extends State<HomePage> {
                 margin: EdgeInsets.only(right: 60),
                 child: Text("CUENTANOS QUE PASA"),
               ),
-              Container( 
+              Container(
                 child: Column(
                   children: <Widget>[
                     Container(
@@ -317,23 +409,25 @@ class _HomePageState extends State<HomePage> {
               keyboardType: TextInputType.multiline,
             ),
           ),
-          SizedBox(height: 2,),
+          SizedBox(
+            height: 2,
+          ),
           Container(
             child: Align(
               alignment: Alignment.centerRight,
               child: Container(
                 height: 22,
                 child: RaisedButton(
-                          
-                          color: Colors.greenAccent,
-                          onPressed: () { 
-                            setState(() {
-                              this._mostrarAlert(context,"Información","Comentario enviado");
-                            });
-                          },
-                          shape: roundedButton,
-                          child: Text("Enviar"),
-                        ),
+                  color: Colors.greenAccent,
+                  onPressed: () {
+                    setState(() {
+                      this._mostrarAlert(
+                          context, "Información", "Comentario enviado");
+                    });
+                  },
+                  shape: roundedButton,
+                  child: Text("Enviar"),
+                ),
               ),
             ),
           )
@@ -403,35 +497,35 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-
-    void _mostrarAlert(BuildContext context, String titulo, String mensaje) {
+  void _mostrarAlert(BuildContext context, String titulo, String mensaje) {
     showDialog(
       context: context,
       barrierDismissible: true,
-      builder: (context){ 
+      builder: (context) {
         return AlertDialog(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
           title: Text(titulo),
-          content: Column( 
+          content: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Text(mensaje),
-             Container(
-               width: 130,
-               height: 130,
-                child:Image(image: AssetImage("assets/logo.jpg")),
-                
-             ),
+              Container(
+                width: 130,
+                height: 130,
+                child: Image(image: AssetImage("assets/logo.jpg")),
+              ),
             ],
           ),
-          actions: <Widget>[ 
-            FlatButton(onPressed: ()=>Navigator.of(context).pop() , child: Text('Cancelar')),
-            FlatButton(onPressed: ()=>Navigator.of(context).pop() , child: Text('Ok'))
+          actions: <Widget>[
+            FlatButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: Text('Cancelar')),
+            FlatButton(
+                onPressed: () => Navigator.of(context).pop(), child: Text('Ok'))
           ],
-          
-         );
-       },
-
+        );
+      },
     );
   }
 }
