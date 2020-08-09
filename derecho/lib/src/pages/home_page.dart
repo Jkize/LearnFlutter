@@ -112,7 +112,7 @@ class _HomePageState extends State<HomePage> {
           SizedBox(
             height: 30,
           ),
-          custom(false, "MEDECINA LEGAL"),
+          custom(false, "MEDICINA LEGAL"),
           SizedBox(
             height: 10,
           ),

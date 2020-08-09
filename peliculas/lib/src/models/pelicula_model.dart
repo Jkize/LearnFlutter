@@ -14,6 +14,7 @@ class Peliculas {
 }
 
 class Pelicula {
+  String uniqueId;
   double popularity;
   int voteCount;
   bool video;
@@ -68,5 +69,16 @@ class Pelicula {
       return 'https://image.shutterstock.com/image-vector/no-image-vector-symbol-missing-260nw-1310632172.jpg';
     }
     return 'https://image.tmdb.org/t/p/w500/$posterPath';
+  }
+
+
+  
+  getBackgroundImg() {
+    print(this.backdropPath);
+    if (posterPath == null) {
+      return 'https://image.shutterstock.com/image-vector/no-image-vector-symbol-missing-260nw-1310632172.jpg';
+    }
+    print('Lo que imprimo https://image.tmdb.org/t/p/w500$backdropPath');
+    return 'https://image.tmdb.org/t/p/w500$backdropPath';
   }
 }
